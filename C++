@@ -1,0 +1,78 @@
+#include <iostream>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string>
+#include <iomanip>
+#include <math.h>
+
+using namespace std;
+
+string input;
+double sum;
+double maximum;
+double minimum;
+double avg;
+double num = 0;
+int total =0;
+int posMax = 1;
+int posMin = 1;
+bool cou;
+char first;
+double roundDown(double num);
+int main(){
+    std::cin >> input;
+    for (int i=0; i<input.size(); i++) {
+        first = input[i];
+        if (isdigit(first) == true){
+            cou = true;
+        }else if (first == '-'||first=='.') {
+            cou = true;
+        }
+        else{
+            cou = false;
+            std::cout << "Count=" << total << endl;
+            exit(0);
+        }
+    }
+    num = std::stod(input);
+    maximum = num;
+    minimum = num;
+    while (cou==true) {
+        total++;
+        num = std::stod(input);
+        if (num>maximum){
+            maximum = num;
+            posMax = total;
+        }else if (num < minimum){
+            minimum = num;
+            posMin = total;
+        }
+        sum = sum+num;
+        avg = sum/total;
+    std::cin >> input;
+    for (int i=0; i<input.size(); i++) {
+        first = input[i];
+        if (isdigit(first) == true){
+            cou = true;
+        }else if (first == '-'||first=='.') {
+            cou = true;
+        }
+        else{
+            cou = false;
+        }
+    }
+  }
+    sum = roundDown(sum);
+    avg = roundDown(avg);
+    std::cout << "Count=" << total <<fixed <<setprecision(2)<< endl;
+    std::cout << "Sum=" << sum << fixed<< setprecision(2) << endl;
+    std::cout << "Average=" << avg << fixed << setprecision(2) << endl;
+    std::cout << "Maximum=" << maximum <<fixed<< setprecision(2) << " at position=" << posMax << endl;
+    std::cout << "Minimum=" << minimum <<fixed<< setprecision(2) << " at position=" << posMin << endl;
+    exit(0);
+}
+double roundDown(double num){
+    num *=100;
+    num = floor(num)/100;
+    return num;
+}
